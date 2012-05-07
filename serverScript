@@ -1,0 +1,277 @@
+Script started on Mon 02 May 2011 10:59:47 PM EDT
+fork {~/spr11/os/Prj3} > make
+
+g++ bclient.c -o bclient
+
+g++ bserver.c -o bserver
+
+g++ lsclient.c -o lsclient
+
+g++ lsserver.c -o lsserver
+
+g++ dclient.c -o dclient
+
+g++ drandom.c -o drandom
+
+g++ dserver.c -o dserver
+
+g++ fclient.c -o fclient
+
+g++ fserver.c -o fserver	
+
+fork {~/spr11/os/Prj3} > ./bserver 4500
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Bserver waiting to read from new Connection...
+
+Request : malayalam
+
+Response :malayalam
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Bserver waiting to read from new Connection...
+
+Request : vinucharanya
+
+Response :aynarahcuniv
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > ./lsserver 4500
+
+Address already in use
+
+fork {~/spr11/os/Prj3} > ./lsserver 5000
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+LSserver waiting to read from new Connection...
+
+Request :ls 
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+LSserver waiting to read from new Connection...
+
+Request :ls  -l
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+LSserver waiting to read from new Connection...
+
+Request :ls  -l -r
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > ./dserver 10000 10 10 test1 
+.txt
+
+
+
+ Port	: 10000
+
+ File	: test1.txt
+
+ Track	: 10
+
+ Sector	: 10
+
+ Blocks	: 100
+
+ FSize	: 12800
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Dserver waiting to read from new Connection...
+
+
+
+Request	: i
+
+
+
+Info : 10 10
+
+
+
+Request	: r
+
+
+
+
+
+Request	: w
+
+
+
+
+
+Request	: w 1 4 5 hello
+
+
+
+Write in Block : 3
+
+
+
+The buffer starts at : 8
+
+
+
+Request	: r 1 4
+
+
+
+Read from Block : 3
+
+
+
+Request	: displaying 128 bytes with null turned into 0
+
+
+
+
+
+Request	: r 12 12
+
+
+
+Read from Block : 121
+
+
+
+Request	: w 12 13 5 hello
+
+
+
+
+
+Request	: r 1 4
+
+
+
+Read from Block : 3
+
+
+
+Closing Client
+
+
+
+Listening socket for Incoming Connections ..
+
+
+Accepting Connection Successful..
+
+
+
+Dserver waiting to read from new Connection...
+
+
+
+Request	: i
+
+Info : 10 10
+
+
+
+Request	: W 1 3 5 hello
+
+Write in Block : 2
+
+
+
+The buffer starts at : 8
+
+
+
+Request	: W 1 4 15 applehellpapple
+
+Write in Block : 3
+
+
+
+The buffer starts at : 9
+
+
+
+Request	: R 1 3
+
+Read from Block : 2
+
+
+
+Request	: R 1 4
+
+Read from Block : 3
+
+
+
+Closing Client
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > exit
+
+exit
+Script done on Mon 02 May 2011 11:08:22 PM EDT

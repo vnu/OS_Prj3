@@ -1,0 +1,256 @@
+Script started on Mon 02 May 2011 11:33:15 PM EDT
+fork {~/spr11/os/Prj3} > make
+
+g++ bclient.c -o bclient
+
+g++ bserver.c -o bserver
+
+g++ lsclient.c -o lsclient
+
+g++ lsserver.c -o lsserver
+
+g++ dclient.c -o dclient
+
+g++ drandom.c -o drandom
+
+g++ dserver.c -o dserver
+
+g++ fclient.c -o fclient
+
+g++ fserver.c -o fserver	
+
+fork {~/spr11/os/Prj3} > ./bserver 2000
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Bserver waiting to read from new Connection...
+
+Request : malayalam
+
+Response :malayalam
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Bserver waiting to read from new Connection...
+
+Request : applehello
+
+Response :ollehelppa
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > ./lsserver 3000
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+LSserver waiting to read from new Connection...
+
+Request :ls 
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+LSserver waiting to read from new Connection...
+
+Request :ls  -l -r
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > ./dserver 4000 10 10 test.t 
+xt
+
+
+
+ Port	: 4000
+
+ File	: test.txt
+
+ Track	: 10
+
+ Sector	: 10
+
+ Blocks	: 100
+
+ FSize	: 12800
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Dserver waiting to read from new Connection...
+
+
+
+Request	: i
+
+
+
+Info : 10 10
+
+
+
+Request	: w
+
+
+
+
+
+Request	: r
+
+
+
+
+
+Request	: w 1 5 10 applehellp
+
+
+
+Write in Block : 4
+
+
+
+The buffer starts at : 9
+
+
+
+Request	: r 1 5
+
+
+
+Read from Block : 4
+
+
+
+Request	: w 11 12 5 hello
+
+
+
+
+
+Request	: r 1 6
+
+
+
+Read from Block : 5
+
+
+
+Request	: r 12 1
+
+
+
+Read from Block : 110
+
+
+
+Closing Client
+
+
+
+Listening socket for Incoming Connections ..
+
+
+
+Accepting Connection Successful..
+
+
+
+Dserver waiting to read from new Connection...
+
+
+
+Request	: i
+
+Info : 10 10
+
+
+
+Request	: W 1 3 10 hellovinuc
+
+Write in Block : 2
+
+
+
+The buffer starts at : 9
+
+
+
+Request	: R 1 3
+
+Read from Block : 2
+
+
+
+Request	: W 1 4 3 hel
+
+Write in Block : 3
+
+
+
+The buffer starts at : 8
+
+
+
+Request	: R 1 4
+
+Read from Block : 3
+
+
+
+Closing Client
+
+
+
+Listening socket for Incoming Connections ..
+
+^C
+
+fork {~/spr11/os/Prj3} > exit
+
+exit
+
+
+Script done on Mon 02 May 2011 11:41:01 PM EDT

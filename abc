@@ -1,0 +1,313 @@
+Script started on Mon 02 May 2011 11:53:48 PM EDT
+fork {~/spr11/os/Prj3} >./dfclient localhost 6000
+
+
+
+Enter your Command : c f1
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Created Successfully
+
+
+
+Enter your Command : w f1 10 abplaapple
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Written Successfully
+
+
+
+Enter your Command : r f1
+
+Nread in fclient : 16
+
+
+
+DServer	: 0: 10 abplaapple
+
+
+
+Enter your Command : r f2
+
+Nread in fclient : 28
+
+
+
+DServer	: 1 : File Name Doesn't Exists
+
+
+
+Enter your Command : w f2
+
+Nread in fclient : 51
+
+
+
+DServer	: Error : Write Format : w <filename> <length> <data>
+
+
+
+Enter your Command : c
+
+Nread in fclient : 36
+
+
+
+DServer	: Error : Create Format : c <filename>
+
+
+
+Enter your Command : c f1
+
+Nread in fclient : 28
+
+
+
+DServer	: 1 : File Name Already Exists
+
+
+
+Enter your Command : d f1
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Deleted Successfully
+
+
+
+Enter your Command : l 0
+
+Nread in fclient : 23
+
+
+
+DServer	: 1 : No files to display
+
+
+
+Enter your Command : c f1
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Created Successfully
+
+
+
+Enter your Command : l 0
+
+Nread in fclient : 3
+
+
+
+DServer	: f1
+
+
+
+
+
+Enter your Command : l 1
+
+Nread in fclient : 5
+
+
+
+DServer	: f1 0
+
+
+
+
+
+Enter your Command : mkdir d1
+
+Nread in fclient : 34
+
+
+
+DServer	: 0 : Directory Created Successfully
+
+
+
+Enter your Command : cd dq 1
+
+Nread in fclient : 34
+
+
+
+DServer	: 0 : Directory Changed Successfully
+
+
+
+Enter your Command : pwd
+
+Nread in fclient : 8
+
+
+
+DServer	: root/d1/
+
+
+
+Enter your Command : cd ..
+
+Nread in fclient : 33
+
+
+
+DServer	: 2 : Directory Change Unsuccessful
+
+
+
+Enter your Command : rmdir d1
+
+Nread in fclient : 34
+
+
+
+DServer	: 0 : Directory Deleted Successfully
+
+
+
+Enter your Command : mkdir d1
+
+Nread in fclient : 34
+
+
+
+DServer	: 0 : Directory Created Successfully
+
+
+
+Enter your Command : cd d1
+
+Nread in fclient : 34
+
+
+
+DServer	: 0 : Directory Changed Successfully
+
+
+
+Enter your Command : c f1
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Created Successfully
+
+
+
+Enter your Command : w f1 10 apple apple
+
+Nread in fclient : 29
+
+
+
+DServer	: 0 : File Written Successfully
+
+
+
+Enter your Command : r f1
+
+Nread in fclient : 16
+
+
+
+DServer	: 0: 10 apple appl
+
+
+
+Enter your Command : pwd
+
+Nread in fclient : 8
+
+
+
+DServer	: root/d1/
+
+
+
+Enter your Command : rmdir d1
+
+Nread in fclient : 33
+
+
+
+DServer	: 1 : Directory Name Doesn't Exists
+
+
+
+Enter your Command : l 1
+
+Nread in fclient : 6
+
+
+
+DServer	: f1 10
+
+
+
+
+
+Enter your Command : cd ..
+
+Nread in fclient : 33
+
+
+
+DServer	: 2 : Directory Change Unsuccessful
+
+
+
+Enter your Command : rmdir d1
+
+Nread in fclient : 66
+
+
+
+DServer	: 2 : Directory is not Empty. Please delete the content before rmdir
+
+
+
+Enter your Command : f
+
+Nread in fclient : 21
+
+
+
+DServer	: 0 : Format Successful
+
+
+
+Enter your Command : l 0
+
+Nread in fclient : 23
+
+
+
+DServer	: 1 : No files to display
+
+
+
+Enter your Command : exit
+
+
+
+Exiting Client
+
+fork {~/spr11/os/Prj3} >exit
+
+exit
+
+
+Script done on Mon 02 May 2011 11:56:08 PM EDT

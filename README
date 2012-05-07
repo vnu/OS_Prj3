@@ -1,0 +1,222 @@
+Pr3README		- Project 3 ReadMe File
+Makefile		- Make File for the Project 3
+Commands:
+make
+    - to make the project
+      Creates the executable files for bserver bclient lsserver lsclient dserver dclient drandom fserver and fclient
+make clean
+   - to clean the project
+     In this project it removes the executables created during make
+osheaders.h		- Common header file for all the four problems
+
+Problem 1 : Basic Client Server
+
+bserver.c   	- 		Implementation of Basic server
+			The sockets are created and listening on the port for incoming client connection. If a connections arrives it accepts the connection
+			It reads the client socket for the string to be reversed. It reverses the string and writes the output to the client socket. 
+			It waits for other incoming connections. bserver must be closed by using ^C.
+
+To Execute 
+./bserver.c <PORT>
+Example
+./bb 10000
+
+bclient.c   	- Implementation of Basic client
+	The socket are created and the string to be passed is sent as a command line argument. The command line argument is sent to the socket
+	connecting the server. The output is read from the socket which is a reversed string. 
+	
+To Execute:
+./bclient <IP> <PORT> <STRING>
+
+Example :
+./bclient localhost 10000 apple
+
+Output: elppa	
+
+OBSERVATION:
+		This is a simple server client socket programming that reverses the inputted string and sends it back to the client. The client gives error
+		as connection refused if the server is not running while running the client. SO wemust run the server before the client. The client arguments
+		must be server ip, port and the string to connect to the correct server. 
+
+       
+
+Problem 2: Directory listing server
+
+
+lsserver.c - This is a directory listing server that creates socket and waits for client to connect. Once a connection is established, it
+				  reads from the client socket and executes the command in a forked child and writes the output to the client by using dup
+				  
+To Execute 
+./lsserver <PORT>
+
+Example
+./lsserver 10000
+
+To Stop :
+^C
+
+lsclient.c - 		This is a simple server client socket programming that reverses the inputted string and sends it back to the client. The client gives error
+		as connection refused if the server is not running while running the client. SO wemust run the server before the client. The client arguments
+		must be server ip, port and a list of parameters to connect to the correct server. The parameters are concatenated with "ls " and written to the
+		server socket. It prints the output from the server which is ls commands executed on the server.
+			
+To Execute:
+./lsclient.c <IP> <PORT> <PARAM 1> .. <PARAM N>
+
+Example : 
+./lsclient localhost 10000 -l -r -a
+
+Output : 
+Directory listing of the server
+
+The program exits after executing and printing
+
+OBSERVATION:
+		In this program we implemented a diectory listing server and a lsclient. This is also simple server client socket programming that reverses the inputted string and sends it back to the client. The client gives error
+		as connection refused if the server is not running while running the client. SO we must run the server before the client. The client provides the server with data
+		in the form of an array of parameters to the ls program. The server forks a child to handle the request and prints the output to the client socket. The output is displayed at the client end.
+		 
+
+Problem 3: Basic disk-storage system:
+
+dserver.c   	-   This is an implementation of basic disk-storage system implemented through client server socket programming and the data is stored on a file which keeps the data persistent
+						The file is allocated with track*sector*128 bytes of data where the track and sector are given as command line arguments. Based on the request from the client, the server either writes the 
+						data to a specific sector, reads from a specific sector or send the information of tracks and sectors to the client. Currently only one client can connect at a time to the server and the server exists 
+						by ^C. My dserver uses mmap command for memory mapping.
+		
+To Execute
+./dserver <PORT>  <# tracks> <# sectors> <filename>
+Example: 
+./dserver 10000 25 30 test1.txt
+
+TO Stop : ^C
+
+dclient.c	-	This is an implementation of a simple client that loops to receive input in a correct format from the user in the command prompt.
+					It executes till the user gives exit or ^C or if the dserver closes, it quits after sending another command. The various command and the format
+					are given in the disk protocol that follows.
+					
+To Execute:
+./dclient <IP> <PORT>
+
+To Example : 
+./dclient localhost 10000
+
+To stop : ^C or exit or exit the server. 
+
+drandom.c  - This is an implementation of another simple client that randomly generates N iteration of W and R Commands. It initially gets the track and sector details
+					through an internal i command and generates read and write command to read and write 128 bytes into the disk. SEED is the value to the rand function 
+					to generate random numbers.
+					
+To Execute
+./drandom <IP> <PORT> <N> <SEED>
+
+Example	
+./drandom localhost 10000 15 500				
+
+OBSERVATION: 
+				In this we are using a client server to implement a physical disk. The simulated disk is organized by tracks and sectors. the file name is also given as
+				cmd line argument to dserver. This simulation stores the data to the actual disk in the form of a file. My blocks are written in such a way as to reset everytime
+				data is written to it. This is to satisfy the conditions in program 4.
+	
+The Disk Protocol
+
+The server must understand the following commands, and give the following responses:
+• I: information request. The disk returns two integers representing the disk geometry: the number of
+tracks, and the number of sectors per track.
+
+• R c s: read request for the contents of track c sector s. The disk returns ’1’ followed by those 128
+bytes of information, or ’0’ if no such block exists. (This will return whatever data happens to be on
+the disk in a given sector, even if nothing has ever been explicitly written there before.)
+
+• W c s l data: write request for track c sector s. l is the number of bytes being provided, with a
+maximum of 128. The data is those l bytes of data. The disk returns ’1’ to the client if it is a valid
+write request (legal values of c, s and l), or returns a ’0’ otherwise. 
+
+Problem 4: File system server:
+
+fserver.c - Implement a flat filesystem that keeps track of files in a single directory. This connects as a client to dserver and acts as a server
+				to fclient. The fserver initializes the FAT table , FILE table and then various file operation mentioned in the below protocol can be 
+				performed in it. The fserver recieves the commands from fclient performs various file operation based on cmd from client and pass the 
+				appropriate command to dserver to be executed. On recieving response from dserver it modifies the response accordingly and again writes it to 
+				the fclient socket. Based on the read and write data size it has to send multiple read and write commands to the server append it and send it back
+				to the buffer and send it back to the client.
+				
+To Execute : 
+./fserver <PORT> <IP> <DPORT>
+
+Example :
+./fserver 5000 localhost 10000
+
+To Stop : ^C
+
+fclient.c - Implement a simple fclient that gives the various commands to be written through the fserver to the dserver. The various list of commands can be
+			   The various command can be listed by giving 'help' command in the client. The fclient is exited using 'exit command. the protocol is written below.
+			   
+To Execute :
+./fclient <IP> <PORT>
+
+Example :
+./fclient localhost 5000
+
+TO Stop: Exit or ^C
+
+Observation : The diskserver must be running for fserver to run and fserver to run fclient. This program implemented a file server system 
+						and uses the same dserver from the thrid program. It implements a single directory file system
+
+The Filesystem Protocol
+The server must understand the following commands, and give the following responses. 
+
+• F: format. Will format the filesystem on the disk, by initializing any/all of tables that the filesystem
+relies on.
+
+• C f : create file. This will create a file named f in the filesystem. Possible return codes: 0 =
+successfully created the file; 1 = a file of this name already existed; 2 = some other failure (such as
+no space left, etc.).
+
+• D f : delete file. This will delete the file named f from the filesystem. Possible return codes: 0 =
+successfully deleted the file; 1 = a file of this name did not exist; 2 = some other failure.
+
+• L b: directory listing. This will return a listing of the files in the filesystems. b is a boolean flag: if
+’0’ it lists just the names of all the files, one per line; if ’1’ it includes other information about each
+file, such as file length, plus anything else your filesystem might store about it.
+
+• R f : read file. This will read the entire contents of the file named f , and return the data that came
+from it. The message sent back to the client is, in order: a return code, the number of bytes in the file
+(in ASCII), a white-space, and finally the data from the file. Possible return codes: 0 = successfully
+read file; 1 = no such filename exists; 2 = some other failure.
+
+• W f l data: write file. This will overwrite the contents of the file named f with the l bytes of data.
+If the new data is longer than the data previous in the file, the file will be made longer. If the new
+data is shorter than the data previously in the file, the file will be truncated to the new length. A
+return code is sent back to the client. Possible return codes: 0 = successfully written file; 1 = no
+such filename exists; 2 = some other failure (such as no space left, etc.).
+ 
+ Problem 5: Directory structure
+ 		Implementation : Same as above except now it has multiple directory structure. This program is implemented in program 4 as extra commands
+ 		To execute and run use the same files fserver, fclient, and dserver. Execution and running same as above. Extra commands that can be implemented
+ 		in this is also found in the 'help' command in fclient. The list of possible commands are :
+ 		
+ 		Help :
+	1.  Create File	: c <FileName>
+	2.  Write File	: w <FileName> <Len> <data>
+	3.  Read File	: r <FileName>
+	4.  Delete File	: d <FileName>
+	5.  Format	: f
+	6.  List Files	: l <0 or 1>
+	7.  MakeDir	: mkdir <DirName>
+	8.  RemoveDir	: rmdir <DirName>
+	9.  Change Dir	: cd <filename or ..>
+	10. Present Dir	: pwd
+	11. Help	: help
+	12. Exit	: exit
+ 		
+ 		Execution : Same as above
+ 		Stop : Same as above
+ 		
+ 		Observation : We must keep track of directory and file so that names can repeat and track of the current directory to print pwd command.
+ 		mkdir and cd are like C and R of file names. similarly rmdir is like Delete command.
+ 
+ 
+				
+
+
